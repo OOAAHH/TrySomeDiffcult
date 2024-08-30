@@ -1,5 +1,9 @@
 # TrySomeDiffcult
 
+**目录**
+[第一次尝试](https://github.com/OOAAHH/TrySomeDiffcult/tree/main?tab=readme-ov-file#2024119)
+[第二次尝试](https://github.com/OOAAHH/TrySomeDiffcult?tab=readme-ov-file#2024830)
+
 ## 2024.1.19
   我的NW算法的实现，这个东西蛮有意思的。@jit/@njit来做加速函数的部分，发现整体上来看反而不快，比较奇怪。
 
