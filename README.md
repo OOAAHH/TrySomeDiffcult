@@ -44,7 +44,7 @@ char B[] = "ATCGGATCGGGCTACGATCGGGCTACGATCGCGTTTTTTTAAAAAGAAAAAAAAGGGGGGGGTGTATT
 使用优先队列存储路径，路径的优先级基于当前的总得分（已计算部分的得分 + 对未计算部分的一个估计得分）。每次扩展时，从队列中取出优先级最高的路径进行扩展，这样可以尽量保留潜在得分高的路径。
 **但是这样做也有显著的缺点，那就是这样的结果并不一定是最优的**
 
-说到这里，就不得不提路径搜索的三大 baseline 算法 **Dijkstra（荷兰语 迪斯科特拉）**、**Best-first** 以及 **A* search** 算法。
+说到这里，就不得不提路径搜索的三大 baseline 算法 Dijkstra（荷兰语 迪斯科特拉）、Best-first 以及 A* search 算法。
 今天不进行展开，只先尝试用best-first先完成这个算法作业。可能对于人类而言，只需要前10个比对结果就OK👌了。
 代码附在文件`NW实现3.c`中。
 
