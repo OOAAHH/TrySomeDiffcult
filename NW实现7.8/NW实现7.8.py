@@ -1,3 +1,7 @@
+# 算法的构想基本能实现，但是要求矩阵尺寸不是质数，在拆矩阵方式中可以革新。
+# 目前导出的结果是路径，并非比对的结果
+
+
 import numpy as np
 import pandas as pd
 from joblib import Parallel, delayed
