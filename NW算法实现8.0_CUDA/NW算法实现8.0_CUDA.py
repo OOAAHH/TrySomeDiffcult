@@ -1,3 +1,8 @@
+# 用法 
+# python nw9.py -i input.fasta -o alignment_output.txt -g 10.0 -e 0.5 -p 5
+# 没有实现 EDNAFULL 的算法，只是先写上去，都是计划。
+
+
 import numpy as np
 import pandas as pd
 from numba import cuda, int32
@@ -395,7 +400,7 @@ def calculate_alignment_metrics(aligned_A, aligned_B):
     }
     return metrics
 
-def run_alignment(input_fasta, output_file, matrix_type="EDNAFULL", gap_penalty=10.0, extend_penalty=0.5, max_paths=5):
+def run_alignment(input_fasta, output_file, matrix_type="按计划应该是EDNAFULL", gap_penalty=10.0, extend_penalty=0.5, max_paths=5):
     # 读取FASTA文件
     sequences = read_fasta_biopython(input_fasta)
 
@@ -447,7 +452,7 @@ def main():
     parser = argparse.ArgumentParser(description="GPU加速的Needleman-Wunsch序列比对工具")
     parser.add_argument("-i", "--input", required=True, help="输入的FASTA文件路径")
     parser.add_argument("-o", "--output", required=True, help="输出的比对结果文件路径")
-    parser.add_argument("-m", "--matrix", default="EDNAFULL", help="矩阵类型（默认：EDNAFULL）")
+    parser.add_argument("-m", "--matrix", default="按计划是EDNAFULL", help="矩阵类型（默认：按计划是EDNAFULL）")
     parser.add_argument("-g", "--gap", type=float, default=10.0, help="gap罚分（默认：10.0）")
     parser.add_argument("-e", "--extend", type=float, default=0.5, help="gap延伸罚分（默认：0.5）")
     parser.add_argument("-p", "--paths", type=int, default=5, help="最多输出的比对路径数量（默认：5）")
