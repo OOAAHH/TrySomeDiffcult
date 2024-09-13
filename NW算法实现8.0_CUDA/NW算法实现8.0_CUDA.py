@@ -1,6 +1,7 @@
 # 用法 
 # python nw9.py -i input.fasta -o alignment_output.txt -g 10.0 -e 0.5 -p 5
 # 没有实现 EDNAFULL 的算法，只是先写上去，都是计划。
+# GPU的版本非常快，终于是有了一点可用的样子了。
 
 
 import numpy as np
