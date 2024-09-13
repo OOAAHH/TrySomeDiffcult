@@ -5,6 +5,8 @@
 - [第一次尝试](https://github.com/OOAAHH/TrySomeDiffcult/tree/main?tab=readme-ov-file#2024119)
 - [第二次尝试](https://github.com/OOAAHH/TrySomeDiffcult?tab=readme-ov-file#2024830)
 - [第三次尝试](https://github.com/OOAAHH/TrySomeDiffcult#202493)
+- [第四次尝试](https://github.com/OOAAHH/TrySomeDiffcult#202497)
+- [第五次尝试](https://github.com/OOAAHH/TrySomeDiffcult#2024913)
 
 ## 2024.1.19
   我的NW算法的实现，这个东西蛮有意思的。@jit/@njit来做加速函数的部分，发现整体上来看反而不快，比较奇怪。
@@ -84,3 +86,28 @@ BTW，接下来在算法上的革新主要会做“矩阵的启发式稀疏计�
 矩阵拆分图如下
 
 ![截屏2024-09-07 21 08 30](https://github.com/user-attachments/assets/2bb49e84-9751-4db6-8eae-75131f38ab36)
+
+
+
+## 2024.9.13
+**进一步修订了并行化的思路。**
+之前的思路需要拆分小矩阵，原计划是按照一定的方式对矩阵进行拆分，但这里有两个问题，一个是如果按照最小因数拆分，存在质数无法进一步拆分的问题；此外，这样的拆分方式增加了处理矩阵接缝区域的复杂度。我进一步深化拆分的粒度，已知对于NW算法这样的矩阵，反对角线的元素相互之间没有依赖关系，因此从这个角度进行并行化的拆分。
+
+这里更新了两类算法实现，
+- 第一是在之前的**NW实现7.8**的基础上进行并行化方式的修改，改为放对角线上元素的并行计算，且只保留每个元素的指针（就是方向）。回溯的时候只对着最高分的方向回溯（潜在问题是分数相同怎么办，这里是记录了多种路线）。形成的文件在**NW算法实现8.0**
+- 第二是在**NW算法实现9.0**的基础上进行修改， 让其能够把CUDA的优点利用起来，把主要的计算放在GPU上执行，速度非常快，上百倍的加速。~~在GPU的帮助下，我的代码终于和现有的成熟工具可以在同一个baseline，这波是大力出奇迹。~~ 在这里发现了，当我们要求非常多的路径的时候，主要的限速步骤是在回溯的地方，回溯也是接下来的加速的一个着力点。形成的文件在**NW算法实现9.0_CUDA**
+  - 调用方式也进行了修正，`python nw9.py -i input.fasta -o alignment_output.txt -g 10.0 -e 0.5 -p 5` 
+
+**下面是使用的截图**
+
+首先会对文件进行检查
+<img width="793" alt="截屏2024-09-13 17 04 06" src="https://github.com/user-attachments/assets/33876b64-7ef6-4460-b201-6a12879eb8e6">
+
+这个就是结果，有点像那么回事。
+<img width="982" alt="截屏2024-09-13 17 58 36" src="https://github.com/user-attachments/assets/00a6e866-1d39-42cd-a406-827023ec6a82">
+
+**接下里的重点**
+1. 把已有的成熟的打分矩阵规则引入NW算法实现9.0_CUDA中
+2. cpu版本进行修正，写一个NW8.0_rust的版本
+
+
